@@ -1,0 +1,727 @@
+Resources:
+  NotesRestApi265FC729:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: NotesRestApi
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Resource
+  NotesRestApiDeployment5FC4DEBA80130e043422c59b32de6a0ca7e9f797:
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      RestApiId:
+        Ref: NotesRestApi265FC729
+      Description: Automatically created by the RestApi construct
+    DependsOn:
+      - NotesRestApinotesidDELETE9C55045D
+      - NotesRestApinotesidGETA31967D3
+      - NotesRestApinotesidPUT05B27A51
+      - NotesRestApinotesid8EE8DFDE
+      - NotesRestApinotesGET0569CE35
+      - NotesRestApinotesPOSTE9318D60
+      - NotesRestApinotesA05E725D
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Deployment/Resource
+  NotesRestApiDeploymentStageprod3B41F132:
+    Type: AWS::ApiGateway::Stage
+    Properties:
+      RestApiId:
+        Ref: NotesRestApi265FC729
+      DeploymentId:
+        Ref: NotesRestApiDeployment5FC4DEBA80130e043422c59b32de6a0ca7e9f797
+      StageName: prod
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/DeploymentStage.prod/Resource
+  NotesRestApinotesA05E725D:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Fn::GetAtt:
+          - NotesRestApi265FC729
+          - RootResourceId
+      PathPart: notes
+      RestApiId:
+        Ref: NotesRestApi265FC729
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/Resource
+  NotesRestApinotesGETApiPermissionCdkNotesApiStackNotesRestApi53B5113DGETnotes7BAC9F5A:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - GetAllHandler0F2B5B9D
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /
+            - Ref: NotesRestApiDeploymentStageprod3B41F132
+            - /GET/notes
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/GET/ApiPermission.CdkNotesApiStackNotesRestApi53B5113D.GET..notes
+  NotesRestApinotesGETApiPermissionTestCdkNotesApiStackNotesRestApi53B5113DGETnotesE4E928DC:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - GetAllHandler0F2B5B9D
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /test-invoke-stage/GET/notes
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/GET/ApiPermission.Test.CdkNotesApiStackNotesRestApi53B5113D.GET..notes
+  NotesRestApinotesGET0569CE35:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: GET
+      ResourceId:
+        Ref: NotesRestApinotesA05E725D
+      RestApiId:
+        Ref: NotesRestApi265FC729
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - ":apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - GetAllHandler0F2B5B9D
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/GET/Resource
+  NotesRestApinotesPOSTApiPermissionCdkNotesApiStackNotesRestApi53B5113DPOSTnotes2DF4231E:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - AddOneHandlerF848DE0B
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /
+            - Ref: NotesRestApiDeploymentStageprod3B41F132
+            - /POST/notes
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/POST/ApiPermission.CdkNotesApiStackNotesRestApi53B5113D.POST..notes
+  NotesRestApinotesPOSTApiPermissionTestCdkNotesApiStackNotesRestApi53B5113DPOSTnotes65C11A5B:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - AddOneHandlerF848DE0B
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /test-invoke-stage/POST/notes
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/POST/ApiPermission.Test.CdkNotesApiStackNotesRestApi53B5113D.POST..notes
+  NotesRestApinotesPOSTE9318D60:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId:
+        Ref: NotesRestApinotesA05E725D
+      RestApiId:
+        Ref: NotesRestApi265FC729
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - ":apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - AddOneHandlerF848DE0B
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/POST/Resource
+  NotesRestApinotesid8EE8DFDE:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: NotesRestApinotesA05E725D
+      PathPart: "{id}"
+      RestApiId:
+        Ref: NotesRestApi265FC729
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/Resource
+  NotesRestApinotesidGETApiPermissionCdkNotesApiStackNotesRestApi53B5113DGETnotesid6BE7EAEA:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - GetOneHandlerFB04B965
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /
+            - Ref: NotesRestApiDeploymentStageprod3B41F132
+            - /GET/notes/*
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/GET/ApiPermission.CdkNotesApiStackNotesRestApi53B5113D.GET..notes.{id}
+  NotesRestApinotesidGETApiPermissionTestCdkNotesApiStackNotesRestApi53B5113DGETnotesidDC5A69D4:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - GetOneHandlerFB04B965
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /test-invoke-stage/GET/notes/*
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/GET/ApiPermission.Test.CdkNotesApiStackNotesRestApi53B5113D.GET..notes.{id}
+  NotesRestApinotesidGETA31967D3:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: GET
+      ResourceId:
+        Ref: NotesRestApinotesid8EE8DFDE
+      RestApiId:
+        Ref: NotesRestApi265FC729
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - ":apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - GetOneHandlerFB04B965
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/GET/Resource
+  NotesRestApinotesidPUTApiPermissionCdkNotesApiStackNotesRestApi53B5113DPUTnotesid630CFCF1:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - UpdateHandler04DBFCAB
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /
+            - Ref: NotesRestApiDeploymentStageprod3B41F132
+            - /PUT/notes/*
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/PUT/ApiPermission.CdkNotesApiStackNotesRestApi53B5113D.PUT..notes.{id}
+  NotesRestApinotesidPUTApiPermissionTestCdkNotesApiStackNotesRestApi53B5113DPUTnotesidA2EA9B1B:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - UpdateHandler04DBFCAB
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /test-invoke-stage/PUT/notes/*
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/PUT/ApiPermission.Test.CdkNotesApiStackNotesRestApi53B5113D.PUT..notes.{id}
+  NotesRestApinotesidPUT05B27A51:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: PUT
+      ResourceId:
+        Ref: NotesRestApinotesid8EE8DFDE
+      RestApiId:
+        Ref: NotesRestApi265FC729
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - ":apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - UpdateHandler04DBFCAB
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/PUT/Resource
+  NotesRestApinotesidDELETEApiPermissionCdkNotesApiStackNotesRestApi53B5113DDELETEnotesid55008434:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - DeleteHandler5D49C796
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /
+            - Ref: NotesRestApiDeploymentStageprod3B41F132
+            - /DELETE/notes/*
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/DELETE/ApiPermission.CdkNotesApiStackNotesRestApi53B5113D.DELETE..notes.{id}
+  NotesRestApinotesidDELETEApiPermissionTestCdkNotesApiStackNotesRestApi53B5113DDELETEnotesid114CA38D:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - DeleteHandler5D49C796
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: NotesRestApi265FC729
+            - /test-invoke-stage/DELETE/notes/*
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/DELETE/ApiPermission.Test.CdkNotesApiStackNotesRestApi53B5113D.DELETE..notes.{id}
+  NotesRestApinotesidDELETE9C55045D:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: DELETE
+      ResourceId:
+        Ref: NotesRestApinotesid8EE8DFDE
+      RestApiId:
+        Ref: NotesRestApi265FC729
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - ":apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - DeleteHandler5D49C796
+                  - Arn
+              - /invocations
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/NotesRestApi/Default/notes/{id}/DELETE/Resource
+  GetAllHandlerServiceRole49FACCD4:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/GetAllHandler/ServiceRole/Resource
+  GetAllHandler0F2B5B9D:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          Fn::Sub: cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}
+        S3Key: 14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f.zip
+      Role:
+        Fn::GetAtt:
+          - GetAllHandlerServiceRole49FACCD4
+          - Arn
+      Handler: hanlder.getAll
+      Runtime: nodejs16.x
+    DependsOn:
+      - GetAllHandlerServiceRole49FACCD4
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/GetAllHandler/Resource
+      aws:asset:path: asset.14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f
+      aws:asset:is-bundled: false
+      aws:asset:property: Code
+  AddOneHandlerServiceRole203E740B:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/AddOneHandler/ServiceRole/Resource
+  AddOneHandlerF848DE0B:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          Fn::Sub: cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}
+        S3Key: 14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f.zip
+      Role:
+        Fn::GetAtt:
+          - AddOneHandlerServiceRole203E740B
+          - Arn
+      Handler: hanlder.create
+      Runtime: nodejs16.x
+    DependsOn:
+      - AddOneHandlerServiceRole203E740B
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/AddOneHandler/Resource
+      aws:asset:path: asset.14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f
+      aws:asset:is-bundled: false
+      aws:asset:property: Code
+  GetOneHandlerServiceRoleE890F293:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/GetOneHandler/ServiceRole/Resource
+  GetOneHandlerFB04B965:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          Fn::Sub: cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}
+        S3Key: 14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f.zip
+      Role:
+        Fn::GetAtt:
+          - GetOneHandlerServiceRoleE890F293
+          - Arn
+      Handler: hanlder.getOne
+      Runtime: nodejs16.x
+    DependsOn:
+      - GetOneHandlerServiceRoleE890F293
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/GetOneHandler/Resource
+      aws:asset:path: asset.14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f
+      aws:asset:is-bundled: false
+      aws:asset:property: Code
+  UpdateHandlerServiceRole79E3FFCC:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/UpdateHandler/ServiceRole/Resource
+  UpdateHandler04DBFCAB:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          Fn::Sub: cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}
+        S3Key: 14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f.zip
+      Role:
+        Fn::GetAtt:
+          - UpdateHandlerServiceRole79E3FFCC
+          - Arn
+      Handler: hanlder.update
+      Runtime: nodejs16.x
+    DependsOn:
+      - UpdateHandlerServiceRole79E3FFCC
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/UpdateHandler/Resource
+      aws:asset:path: asset.14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f
+      aws:asset:is-bundled: false
+      aws:asset:property: Code
+  DeleteHandlerServiceRole15A32A52:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/DeleteHandler/ServiceRole/Resource
+  DeleteHandler5D49C796:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          Fn::Sub: cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}
+        S3Key: 14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f.zip
+      Role:
+        Fn::GetAtt:
+          - DeleteHandlerServiceRole15A32A52
+          - Arn
+      Handler: hanlder.delete
+      Runtime: nodejs16.x
+    DependsOn:
+      - DeleteHandlerServiceRole15A32A52
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/DeleteHandler/Resource
+      aws:asset:path: asset.14b037b2a488567c58fc24a09a122ef91b3167b2aa6d9ecf622ed5d618f8817f
+      aws:asset:is-bundled: false
+      aws:asset:property: Code
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAA/1WQwU7DMBBEv4W7sygg4NwW9YZA5QMq117CNrEdZddUVZR/Z42pCqd9MxqNR76DhxbaG3vixvm+GegA87tY1xu19rMdqbOCJ3uGeYcsq5HM5iNe8BnHIZ0DRinuH6UVHRavguZTnhyuLV/Fb1HlF5TP5ItVaTGDDQdvYVbrDadAzJSi2ebopIDaF14M2aD70lA79S6G7/eWGYVhVY5qWGfXo5QNS8m9ZhmzXOf85Mpeit2/bcqbFD3Vt2LyCEe+/WofoX3SvzsyUTPlKBQQdvV+A0HxNStXAQAA
+    Metadata:
+      aws:cdk:path: CdkNotesApiStack/CDKMetadata/Default
+    Condition: CDKMetadataAvailable
+Outputs:
+  NotesRestApiEndpointD53F8584:
+    Value:
+      Fn::Join:
+        - ""
+        - - https://
+          - Ref: NotesRestApi265FC729
+          - .execute-api.
+          - Ref: AWS::Region
+          - "."
+          - Ref: AWS::URLSuffix
+          - /
+          - Ref: NotesRestApiDeploymentStageprod3B41F132
+          - /
+Conditions:
+  CDKMetadataAvailable:
+    Fn::Or:
+      - Fn::Or:
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - af-south-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-east-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-northeast-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-northeast-2
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-south-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-southeast-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ap-southeast-2
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - ca-central-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - cn-north-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - cn-northwest-1
+      - Fn::Or:
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-central-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-north-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-south-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-west-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-west-2
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - eu-west-3
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - me-south-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - sa-east-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - us-east-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - us-east-2
+      - Fn::Or:
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - us-west-1
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - us-west-2
+Parameters:
+  BootstrapVersion:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /cdk-bootstrap/hnb659fds/version
+    Description: Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]
+Rules:
+  CheckBootstrapVersion:
+    Assertions:
+      - Assert:
+          Fn::Not:
+            - Fn::Contains:
+                - - "1"
+                  - "2"
+                  - "3"
+                  - "4"
+                  - "5"
+                - Ref: BootstrapVersion
+        AssertDescription: CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.
+
